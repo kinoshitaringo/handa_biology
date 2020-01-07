@@ -1,0 +1,34 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "^3.0.0",
+    "cluster": "^0.7.7",
+    "koa": "^2.11.0",
+    "koa-compress": "^3.0.0",
+    "koa-helmet": "^5.2.0",
+    "koa-jwt": "^3.6.0",
+    "koa-router": "^7.4.0",
+    "koa-swagger-decorator": "^1.6.0",
+    "mkdirp": "^0.5.1",
+    "mysql2": "^2.1.0",
+    "typeorm": "^0.2.22",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.0",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-compress": "^2.0.9",
+    "@types/koa-helmet": "^3.1.2",
+    "@types/koa-jwt": "^3.3.0",
+    "@types/koa-router": "^7.0.42",
+    "@types/koa__cors": "^3.0.0",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^13.1.4",
+    "cross-env": "^6.0.3",
+    "pm2": "^4.2.1",
+    "typescript": "^3.7.4"
+  }
+}
