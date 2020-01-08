@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src/main.ts",
+    "watch": "tsc --watch"
+  },
   "dependencies": {
     "@koa/cors": "^3.0.0",
     "cluster": "^0.7.7",
     "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
     "koa-compress": "^3.0.0",
     "koa-helmet": "^5.2.0",
     "koa-jwt": "^3.6.0",
@@ -28,7 +33,9 @@
     "@types/mkdirp": "^0.5.2",
     "@types/node": "^13.1.4",
     "cross-env": "^6.0.3",
+    "nodemon": "^2.0.2",
     "pm2": "^4.2.1",
+    "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
   }
 }

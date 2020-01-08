@@ -31,7 +31,7 @@ export const databaseConfig: DatabaseConfig = {
   password: "root",
   database: DATABASE_CURRENT,
   synchronize: true, // 进行架构同步,数据不安全
-  logging: true,
+  logging: false,
   entities: [...entities],
   migrations: [...migrations],
   extra: {
