@@ -3,12 +3,13 @@ import cluster from "cluster";
 import compress from "koa-compress";
 import configs from "./configs";
 import cors from "@koa/cors";
+import errorPage from "./middlewares/errorPage";
 import helmet from "koa-helmet";
 import http from "http";
 import jwt from "koa-jwt";
 import Koa, { Context } from "koa";
 import os from "os";
-import routes from "./routes";
+import router from "./routes";
 import zlib from "zlib";
 import { logger, skip, stream } from "./utils/logger";
 import { createConnection } from "typeorm";
@@ -28,19 +29,29 @@ class Server {
   constructor() {
     this._app = new Koa();
     this._app.use(bodyParser()); // Enable bodyParser with default options
+    // 数据库连接
+    createConnection(configs.databaseConfig as any)
+      .then(connection => {
+        logger.info("Database synced");
+        this._app.use(router.routes()).use(router.allowedMethods()); // 使用路由
+      })
+      .catch(err => logger.error((err as Error).message));
     // 压缩
-    this._app.use(compress({
-      threshold: 2 * KB,
-      flush: zlib.Z_SYNC_FLUSH
-    }));
+    this._app.use(
+      compress({
+        threshold: 2 * KB,
+        flush: zlib.Z_SYNC_FLUSH,
+      })
+    );
     // 跨域
-    this._app.use(cors({
-      credentials: true,
-      origin: "http://127.0.0.1:3000",
-    }));
+    this._app.use(
+      cors({
+        credentials: true,
+        origin: "http://127.0.0.1:3000",
+      })
+    );
     this._app.use(helmet()); // Provides important security headers to make your app more secure
-  this._app.use(jwt({ secret: configs.serverConfig.session.secret }).unless({ path: [/^\/swagger-/,/.*/] }));
-    this._app.use(routes.routes()).use(routes.allowedMethods()); // 使用路由
+    this._app.use(errorPage); // 处理404错误
     this._server = http.createServer(this._app.callback());
   }
 
@@ -74,27 +85,30 @@ class Server {
     if (cluster.isMaster) {
       // 主线程,同步数据库
       try {
-        await createConnection(configs.databaseConfig as any);
-        logger.info("Database synced");
-
         // for (let i = 0; i < os.cpus().length; i++) {
         for (let i = 0; i < 2; i++) {
           cluster.fork();
         }
 
-        cluster.on("exit", (worker: cluster.Worker, code: number, signal: string) => {
-          logger.info(`Worker ${worker.process.pid} died`);
-        });
+        cluster.on(
+          "exit",
+          (worker: cluster.Worker, code: number, signal: string) => {
+            logger.info(`Worker ${worker.process.pid} died`);
+          }
+        );
 
-        cluster.on("listening", (worker: cluster.Worker, address: cluster.Address) => {
-          logger.info(`Worker ${worker.process.pid} connected to port: ${address.port}`);
-        });
-      }
-      catch (err) {
+        cluster.on(
+          "listening",
+          (worker: cluster.Worker, address: cluster.Address) => {
+            logger.info(
+              `Worker ${worker.process.pid} connected to port: ${address.port}`
+            );
+          }
+        );
+      } catch (err) {
         logger.error((err as Error).message);
       }
-    }
-    else {
+    } else {
       // 子线程
       this._server.listen(configs.serverConfig.port);
       this._server.on("error", (err: Error): void => {
