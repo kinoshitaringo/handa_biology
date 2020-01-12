@@ -9,7 +9,7 @@ let router: Router = new Router();
 router.redirect("/", "/static/index.html");
 router.get("/(.*)", async (context: Context) => {
   let file = send(context, context.path.replace("/static", ""), {
-    root: resolve("public"),
+    root: resolve("public")
   });
   return file;
 });

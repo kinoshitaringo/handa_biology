@@ -9,10 +9,11 @@ import http from "http";
 import jwt from "koa-jwt";
 import Koa, { Context } from "koa";
 import os from "os";
+import resolve from "./utils/pather";
 import router from "./routes";
 import zlib from "zlib";
-import { logger, skip, stream } from "./utils/logger";
 import { createConnection } from "typeorm";
+import { logger, skip, stream } from "./utils/logger";
 
 interface ServerAddress {
   address: string;
@@ -40,14 +41,14 @@ class Server {
     this._app.use(
       compress({
         threshold: 2 * KB,
-        flush: zlib.Z_SYNC_FLUSH,
+        flush: zlib.Z_SYNC_FLUSH
       })
     );
     // 跨域
     this._app.use(
       cors({
         credentials: true,
-        origin: "http://127.0.0.1:3000",
+        origin: "http://127.0.0.1:3000"
       })
     );
     this._app.use(helmet()); // Provides important security headers to make your app more secure

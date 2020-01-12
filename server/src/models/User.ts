@@ -11,14 +11,14 @@ export class User extends BaseEntity {
   @Column({ length: 100 })
   password!: string;
 
-  @Column({ length: 100 })
-  avatar?: string;
+  @Column({ length: 100, default: "" })
+  avatar!: string;
 
   @Column({ default: 1 })
   gender!: number;
 
-  @Column({ length: 300 })
-  intro?: string;
+  @Column({ length: 300, default: "" })
+  intro!: string;
 }
 
 export const Schema = {

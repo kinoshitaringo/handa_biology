@@ -20,12 +20,13 @@ if (cluster.isMaster) {
 const logger: Logger = winston.createLogger({
   transports: [
     new transports.File(LOGGING_CONFIG.file),
-    new transports.Console(LOGGING_CONFIG.console),
+    new transports.Console(LOGGING_CONFIG.console)
   ],
-  exitOnError: false, // 错误的时候不退出
+  exitOnError: false // 错误的时候不退出
 });
 logger.info = logger.info.bind(logger);
 
+export default logger;
 export { logger };
 
 export const skip = (context: Context, next: Next): boolean => {
@@ -37,5 +38,5 @@ export const skip = (context: Context, next: Next): boolean => {
 export const stream = {
   write: (message: string, encoding: string): void => {
     logger.info(message);
-  },
+  }
 };
