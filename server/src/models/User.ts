@@ -1,11 +1,16 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn
+  } from "typeorm";
 
 @Entity()
-export class User extends BaseEntity {
+export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ length: 80 })
+  @Column({ length: 100 })
   account!: string;
 
   @Column({ length: 100 })
@@ -17,7 +22,7 @@ export class User extends BaseEntity {
   @Column({ default: 1 })
   gender!: number;
 
-  @Column({ length: 300, default: "" })
+  @Column({ length: 500, default: "" })
   intro!: string;
 }
 
@@ -28,12 +33,12 @@ export const Schema = {
   avatar: {
     type: "string",
     required: false,
-    example: "http://www.baidu.com/favicon.ico",
+    example: "http://www.baidu.com/favicon.ico"
   },
   gender: { type: "number", required: false, example: 2 },
   intro: {
     type: "string",
     required: false,
-    example: "this is a intro of somebody!",
-  },
+    example: "this is a intro of somebody!"
+  }
 };

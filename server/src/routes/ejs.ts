@@ -1,3 +1,4 @@
+import * as models from "../models";
 import * as utils from "../utils";
 import _ from "lodash";
 import ejs from "ejs";
