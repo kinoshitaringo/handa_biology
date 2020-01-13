@@ -1,0 +1,19 @@
+<div id="carousel">
+  <div id="header-carousel" class="owl-carousel owl-theme">
+    <% for(let item of carousels){ %>
+    <div class="item">
+      <img src="<%= item.img %>" alt="" />
+      <div class="carousel-text">
+        <div class="line">
+          <div class="s-12 l-9">
+            <h2><%= item.title %></h2>
+          </div>
+          <div class="s-12 l-9">
+            <p><%= item.description %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

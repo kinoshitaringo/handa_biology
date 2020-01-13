@@ -16,7 +16,7 @@ router.get("/favicon.ico", (context: Context) => {
   let favicon = send(context, "/favicon.ico", { root: resolve("public") });
   return favicon;
 });
-router.use(ejsRouter.routes()).use(ejsRouter.allowedMethods());
+router.use("/ejs", ejsRouter.routes()).use(ejsRouter.allowedMethods());
 router.use("/static", staticRouter.routes()).use(staticRouter.allowedMethods());
 router.use(swaggerRouter.routes()).use(swaggerRouter.allowedMethods());
 

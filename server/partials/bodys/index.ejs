@@ -1,0 +1,32 @@
+<%# the html-body of page index %>
+<%- include("/header"); %>
+<%- include("/carousel",carousels); %>
+
+<%# "script for the carousel" %>
+<%# "全局使用的scripts" %>
+<script type="text/javascript" src="js/responsee.js"></script>
+<script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    var owl = $("#header-carousel");
+    owl.owlCarousel({
+      nav: true,
+      dots: false,
+      items: 1,
+      loop: true,
+      navText: ["&#xf007", "&#xf006"],
+      autoplay: true,
+      autoplayTimeout: 4000
+    });
+    var owl = $("#news-carousel");
+    owl.owlCarousel({
+      nav: true,
+      dots: false,
+      items: 1,
+      loop: true,
+      navText: ["&#xf007", "&#xf006"],
+      autoplay: true,
+      autoplayTimeout: 4000
+    });
+  });
+</script>
