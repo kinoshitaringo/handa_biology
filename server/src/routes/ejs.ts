@@ -15,13 +15,25 @@ let router: Router = new Router();
 
 const EJS_ROOT: string = utils.resolve("partials");
 
+//  请求路径解析
+const pathMapper = (fileName: string): string => {
+  let path: string;
+  switch (fileName) {
+    case "index":
+      path = "home/index";
+      break;
+    default:
+      path = `${fileName}/index`;
+      break;
+  }
+  return `${path}.html`;
+};
+
 const render = (fileName: string, props?: ejs.Data): Promise<string> => {
   return new Promise(async (resolve, reject) => {
     try {
       let template = (
-        await utils.readFile(
-          utils.resolve("partials/views", `${fileName}.html`)
-        )
+        await utils.readFile(utils.resolve("partials", pathMapper(fileName)))
       ).toString();
       resolve(ejs.render(template, { ...props }, { root: EJS_ROOT }));
     } catch (err) {
