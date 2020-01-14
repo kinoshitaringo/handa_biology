@@ -20,7 +20,10 @@ if (cluster.isMaster) {
 const logger: Logger = winston.createLogger({
   transports: [
     new transports.File(LOGGING_CONFIG.file),
-    new transports.Console(LOGGING_CONFIG.console)
+    new transports.Console({
+      ...LOGGING_CONFIG.console,
+      format: winston.format.simple()
+    })
   ],
   exitOnError: false // 错误的时候不退出
 });

@@ -42,6 +42,7 @@ const render = (fileName: string, props?: ejs.Data): Promise<string> => {
   });
 };
 
+router.redirect("/", "/ejs/index"); // 重定向/ejs到/ejs/index
 router.get("/index", async (context: Context, next: Koa.Next) => {
   let carousels: Array<Carousel> = [
     {
@@ -61,6 +62,10 @@ router.get("/index", async (context: Context, next: Koa.Next) => {
     }
   ];
   context.state.props = { carousels };
+  await next();
+});
+
+router.get("/product", async (context: Context, next: Koa.Next) => {
   await next();
 });
 

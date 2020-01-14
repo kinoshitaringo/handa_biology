@@ -43,9 +43,9 @@ export const loggingConfig: LoggingConfig = {
   console: {
     level: LoggingLevel.info,
     handleExceptions: true,
-    json: true,
+    json: false,
     colorize: true
   },
   // 日志文件夹为 "/logs"
   directory: resolve("log")
-}
+};

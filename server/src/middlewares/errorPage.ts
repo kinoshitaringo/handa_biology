@@ -11,6 +11,7 @@ export default async function errorPage(context: Context, next: Next) {
     await next();
     let statusCode: number = context.status;
     if (statusCode === 404) {
+      logger.info(`GET ${context.request.URL} 404`);
       context.throw(404);
     }
   } catch (err) {
