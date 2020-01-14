@@ -15,17 +15,25 @@ import {
   401: { description: "unauthorized,missing/wrong/expired jwt token" }
 })
 @tagsAll(["carousel"])
-export default class CarouselController {
+export default class CarouselProtected {
+  @request("post", "/carousel")
+  @summary("新增轮播图")
+  public static async addCarousels(context: Context) {
+    context.body = { description: "新增成功" };
+  }
+}
+
+@responsesAll({
+  200: { description: "OK" },
+  400: { description: "bad request" },
+  401: { description: "unauthorized,missing/wrong/expired jwt token" }
+})
+@tagsAll(["carousel"])
+export class CarouselUnprotected {
   @request("get", "/carousels")
   @summary("获取轮播图")
   public static async getCarousels(context: Context) {
     let carousels: Carousel[] = [];
     context.body = carousels;
-  }
-
-  @request("post", "/carousel")
-  @summary("新增轮播图")
-  public static async addCarousels(context: Context) {
-    context.body = { description: "新增成功" };
   }
 }

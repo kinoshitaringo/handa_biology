@@ -1,7 +1,10 @@
-import resolve from "../utils/pather";
-import { logger } from "../utils/logger";
-import send from "koa-send";
+import * as utils from "../utils";
+import koaSend from "koa-send";
 import { Context, Next } from "koa";
+import { logger } from "../utils/logger";
+
+let send = (context: Context, errCode: number) =>
+  koaSend(context, `/${errCode}.html`, { root: utils.resolve("public") });
 
 export default async function errorPage(context: Context, next: Next) {
   try {
@@ -12,12 +15,16 @@ export default async function errorPage(context: Context, next: Next) {
     }
   } catch (err) {
     context.status = err.status || 500;
-    if (context.status === 404) {
-      // page no found
-      return send(context, "/404.html", { root: resolve("public") });
-    } else {
-      logger.error(err);
-      return send(context, "/503.html", { root: resolve("public") });
+    switch (context.status) {
+      case 401:
+        break;
+      case 404:
+        break;
+      default:
+        context.status = 503;
+        break;
     }
+
+    return send(context, context.status);
   }
 }

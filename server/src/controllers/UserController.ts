@@ -16,7 +16,7 @@ import { User } from "../models";
   401: { description: "unauthorized,missing/wrong/expired jwt token" }
 })
 @tagsAll(["User"])
-export default class UserController {
+export default class UserProtected {
   @request("get", "/users")
   @summary("获取所有用户")
   public static async getUsers(context: Context) {
@@ -44,3 +44,11 @@ export default class UserController {
 
   public static async createUser(context: Context) {}
 }
+
+@responsesAll({
+  200: { description: "OK" },
+  400: { description: "bad request" },
+  401: { description: "unauthorized,missing/wrong/expired jwt token" }
+})
+@tagsAll(["User"])
+export class UserUnprotected {}

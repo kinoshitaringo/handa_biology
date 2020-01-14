@@ -1,4 +1,4 @@
-@target= http://127.0.0.1:3001
+@base= http://127.0.0.1:3001
 
 ### 1. get /
-GET {{target}}/ HTTP/1.1
+GET {{base}}/ejs/index HTTP/1.1
