@@ -1,2 +1,2 @@
-export { UserUnprotected } from "./UserController";
-export { CarouselUnprotected } from "./CarouselController";
+export { UserUnprotected as carousel } from "./UserController";
+export { CarouselUnprotected as use } from "./CarouselController";

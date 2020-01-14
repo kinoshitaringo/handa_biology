@@ -1,20 +1,24 @@
+import * as controllers from "../../controllers";
+import resolve from "../../utils/pather";
 import { SwaggerRouter } from "koa-swagger-decorator";
-import resolve from "../utils/pather";
-import * as controllers from "../controllers";
 
-interface SwaggerRouterOptions {
+export interface SwaggerRouterOptions {
   title?: string;
   description?: string;
   version?: string;
+  swaggerHtmlEndpoint?: string;
+  swaggerJsonEndpoint?: string;
 }
 
 const swaggerRouterOptions: SwaggerRouterOptions = {
   title: "handa biology",
   description: "API DOC",
   version: "1.0.0",
+  swaggerHtmlEndpoint: "/swagger.html",
+  swaggerJsonEndpoint: "/swagger.json"
 };
 const koaRouterOptions = {
-  prefix: "/api",
+  prefix: "/api/auth"
 };
 
 let router: SwaggerRouter = new SwaggerRouter(
