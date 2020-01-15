@@ -1,4 +1,4 @@
-import * as utils from "../utils";
+import * as apiRouter from "./api";
 import configs from "../configs";
 import ejsRouter from "./ejs";
 import jwt from "koa-jwt";
@@ -6,9 +6,7 @@ import resolve from "../utils/pather";
 import Router from "koa-router";
 import send from "koa-send";
 import staticRouter from "./static";
-import swaggerRouter from "./swagger";
-import swaggerUnprotectedRouter from "./swagger/unprotected";
-import { Context, Next } from "koa";
+import { Context } from "koa";
 
 let router: Router = new Router();
 
@@ -21,17 +19,22 @@ router.get("/favicon.ico", (context: Context) => {
 router.use("/ejs", ejsRouter.routes()).use(ejsRouter.allowedMethods());
 router.use("/static", staticRouter.routes()).use(staticRouter.allowedMethods());
 router
-  .use(swaggerUnprotectedRouter.routes())
-  .use(swaggerUnprotectedRouter.allowedMethods());
+  .use("/api", apiRouter.default.routes())
+  .use(apiRouter.default.allowedMethods());
+router
+  .use("/api/open", apiRouter.open.routes())
+  .use(apiRouter.open.allowedMethods());
 
 // the code before jwt middleware wont be effected,while the after will
-// router.use(
-//   jwt({ secret: configs.serverConfig.session.secret }).unless({
-//     // host:port/api/swagger-*
-//     path: [/.*\/swagger-/]
-//   })
-// );
+router.use(
+  jwt({ secret: configs.serverConfig.session.secret }).unless({
+    // host:port/api/swagger-*
+    path: [/.*\/swagger\./]
+  })
+);
 
-router.use(swaggerRouter.routes()).use(swaggerRouter.allowedMethods());
+router
+  .use("/api/auth", apiRouter.auth.routes())
+  .use(apiRouter.auth.allowedMethods());
 
 export default router;

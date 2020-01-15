@@ -2,3 +2,10 @@
 
 ### 1. get /
 GET {{base}}/ejs/index HTTP/1.1
+
+### get users
+GET {{base}}/api/open/users HTTP/1.1
+
+### post user
+
+POST {{base}}/api/open/user HTTP/1.1
