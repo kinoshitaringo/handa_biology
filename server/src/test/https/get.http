@@ -4,7 +4,7 @@
 GET {{base}}/ejs/index HTTP/1.1
 
 ### get users
-GET {{base}}/api/open/users HTTP/1.1
+GET {{base}}/api/users HTTP/1.1
 
 ### post user
 

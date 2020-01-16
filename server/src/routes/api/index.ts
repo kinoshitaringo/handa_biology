@@ -4,7 +4,7 @@ import { SwaggerRouter as Router } from "koa-swagger-decorator";
 
 let swaggerOptions = {
   title: "handa_biology API Doc",
-  description: "瀚达生物接口文档[open]",
+  description: "瀚达生物接口文档[all]",
   version: "1.0.0",
   swaggerHtmlEndpoint: "/swagger.html",
   swaggerJsonEndpoint: "/swagger.json",
@@ -13,7 +13,6 @@ let swaggerOptions = {
 let router: Router = new Router({}, swaggerOptions);
 
 router.swagger();
-router.get("/users", controller.user.getUsers);
 router.mapDir(__dirname);
 
 export default router;

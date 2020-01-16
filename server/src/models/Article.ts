@@ -1,21 +1,23 @@
+import User from "./User";
 import {
   BaseEntity,
   Column,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn
   } from "typeorm";
 
 @Entity()
-export default class Carousel extends BaseEntity {
+export default class Article extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ length: 100, default: "" })
-  img!: string;
-
-  @Column({ length: 100, default: "" })
+  @Column({ length: 100 })
   title!: string;
 
   @Column("text", { nullable: true })
-  description?: string;
+  content?: string;
+
+  @ManyToOne(() => User, { nullable: false })
+  author!: User;
 }

@@ -18,9 +18,11 @@ router.get("/favicon.ico", (context: Context) => {
 });
 router.use("/ejs", ejsRouter.routes()).use(ejsRouter.allowedMethods());
 router.use("/static", staticRouter.routes()).use(staticRouter.allowedMethods());
-router
-  .use("/api", apiRouter.default.routes())
-  .use(apiRouter.default.allowedMethods());
+
+if (configs.isDev)
+  router
+    .use("/api", apiRouter.default.routes())
+    .use(apiRouter.default.allowedMethods());
 router
   .use("/api/open", apiRouter.open.routes())
   .use(apiRouter.open.allowedMethods());

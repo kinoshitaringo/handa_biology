@@ -16,7 +16,7 @@ import { User } from "../../../models";
 })
 @tagsAll(["User"])
 export default class UserController {
-  @request("get", "/users")
+  @request("GET", "/open/users")
   @summary("find all users")
   public static async getUsers(context: BaseContext) {
     let users: User[] = await User.find();
@@ -27,7 +27,7 @@ export default class UserController {
     context.body = response;
   }
 
-  @request("post", "/user")
+  @request("POST", "/auth/user")
   @summary("新增用户")
   public static async createUser(context: BaseContext) {
     let user: User = new User();

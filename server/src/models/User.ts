@@ -1,7 +1,9 @@
+import Article from "./Article";
 import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn
   } from "typeorm";
 
@@ -19,11 +21,17 @@ export default class User extends BaseEntity {
   @Column({ length: 100, default: "" })
   avatar!: string;
 
-  @Column({ default: 1 })
+  @Column("bit", { default: 0 })
   gender!: number;
 
-  @Column({ length: 500, default: "" })
-  intro!: string;
+  @Column("text", { nullable: true })
+  intro?: string;
+
+  @OneToMany(
+    () => Article,
+    article => article.author
+  )
+  articles!: Article[];
 }
 
 export const Schema = {

@@ -1,4 +1,3 @@
-
 export enum Envs {
   dev = "development",
   prod = "production"
