@@ -1,4 +1,7 @@
 module.exports = {
+  devServer: {
+    port: 3000
+  },
   publicPath: "/",
   lintOnSave: false,
   runtimeCompiler: true,
@@ -8,4 +11,4 @@ module.exports = {
       symlinks: false
     }
   }
-}
+};
