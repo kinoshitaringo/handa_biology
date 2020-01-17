@@ -28,12 +28,7 @@ router
   .use(apiRouter.open.allowedMethods());
 
 // the code before jwt middleware wont be effected,while the after will
-router.use(
-  jwt({ secret: configs.serverConfig.session.secret }).unless({
-    // host:port/api/swagger-*
-    path: [/.*\/swagger\./]
-  })
-);
+router.use(jwt({ secret: configs.serverConfig.session.secret }));
 
 router
   .use("/api/auth", apiRouter.auth.routes())

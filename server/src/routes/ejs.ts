@@ -1,15 +1,10 @@
+import * as controllers from "./api/controllers";
 import * as models from "../models";
 import * as utils from "../utils";
 import _ from "lodash";
 import ejs from "ejs";
 import Koa, { Context } from "koa";
 import Router from "koa-router";
-
-interface Carousel {
-  img: string;
-  title: string;
-  description: string;
-}
 
 let router: Router = new Router();
 
@@ -44,23 +39,7 @@ const render = (fileName: string, props?: ejs.Data): Promise<string> => {
 
 router.redirect("/", "/ejs/index"); // 重定向/ejs到/ejs/index
 router.get("/index", async (context: Context, next: Koa.Next) => {
-  let carousels: Array<Carousel> = [
-    {
-      img: "img/first.jpg",
-      title: "Theme based on Responsee framework",
-      description: "With amazing responsive carousel"
-    },
-    {
-      img: "img/second.jpg",
-      title: "Build new layout in 10 minutes!",
-      description: "With amazing responsive carousel"
-    },
-    {
-      img: "img/third.jpg",
-      title: "Theme based on Responsee framework",
-      description: "With amazing responsive carousel"
-    }
-  ];
+  let carousels: models.Carousel[] = await controllers.carousel.all();
   context.state.props = { carousels };
   await next();
 });

@@ -3,6 +3,8 @@ import Router from "koa-router";
 
 let router: Router = new Router();
 
-router.get("/users", controller.user.getUsers);
+// code api routes here,example:
+// the api is private
+// router.get("/users", controller.user.getUsers);
 
 export default router;

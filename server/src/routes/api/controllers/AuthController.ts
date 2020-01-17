@@ -5,12 +5,14 @@ import {
   request,
   responses,
   responsesAll,
+  summary,
   tagsAll
   } from "koa-swagger-decorator";
 
 @tagsAll(["Auth"])
 export default class AuthController {
   @request("POST", "/open/login")
+  @summary("用户登陆接口")
   @body({
     account: {
       type: "string",

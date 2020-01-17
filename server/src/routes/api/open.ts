@@ -4,6 +4,8 @@ import Router from "koa-router";
 
 let router: Router = new Router();
 
-router.post("/user", controller.user.createUser);
+// code api routes here,example:
+// the api is public to everyone
+// router.post("/user", controller.user.createUser);
 
 export default router;

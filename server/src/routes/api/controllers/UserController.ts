@@ -31,6 +31,6 @@ export default class UserController {
   @summary("新增用户")
   public static async createUser(context: BaseContext) {
     let user: User = new User();
-    context.body = user;
+    context.body = { descriptioin: "用户暂保存", user };
   }
 }

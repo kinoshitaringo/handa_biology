@@ -5,7 +5,7 @@ import { IS_DEV } from "./env";
 // 数据库配置
 
 const DATABASE_CURRENT: string = IS_DEV ? "handa_test" : "handa_biology";
-const USE_SSL: boolean = !IS_DEV; // if not dev, will use ssl
+const USE_SSL: boolean = false;
 
 export interface DatabaseConfig {
   name: string;
@@ -21,7 +21,7 @@ export interface DatabaseConfig {
   migrations: string[];
   subscribers?: string[];
   extra?: {
-    ssl: boolean;
+    ssl: any;
   };
 }
 
@@ -38,6 +38,6 @@ export const databaseConfig: DatabaseConfig = {
   entities: [..._.map(entities)],
   migrations: [...migrations],
   extra: {
-    ssl: USE_SSL,
-  },
+    ssl: USE_SSL
+  }
 };
