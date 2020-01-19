@@ -22,6 +22,12 @@ const appStore = namespace("app");
 @Component
 export default class App extends Vue {
   @appStore.Getter isLoading!: boolean;
+
+  @appStore.Action("loaded") initLoad!: () => void;
+  private created() {
+    // 防止在loading状态下刷新页面时一直卡在loading
+    this.initLoad();
+  }
 }
 </script>
 
