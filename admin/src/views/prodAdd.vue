@@ -21,6 +21,7 @@
         {{ content }}
       </div>
     </div>
+    <!-- footer -->
 
     <!-- modals -->
     <modal-warn
@@ -35,7 +36,7 @@
 
 <script lang="ts">
 import ModalWarn from "@/components/modals/warn.vue";
-import { Action, namespace } from "vuex-class";
+import { Action, namespace, State } from "vuex-class";
 import { Component, Vue } from "vue-property-decorator";
 import { quillEditor } from "vue-quill-editor";
 
@@ -63,7 +64,6 @@ const appStore = namespace("app");
   components: { quillEditor, ModalWarn }
 })
 export default class ProdAdd extends Vue {
-  private content: string = "";
   private discardPrompt: boolean = false;
 
   // 编辑器设置
@@ -80,8 +80,14 @@ export default class ProdAdd extends Vue {
     theme: "snow"
   };
 
-  @appStore.Action("load") loading!: () => void;
-  @appStore.Action("loaded") loaded!: () => void;
+  private get content(): string {
+    return this.quillContent;
+  }
+
+  private set content(payload: string) {
+    console.log(payload);
+    this.setQuillContent(payload);
+  }
 
   private created() {}
 
@@ -117,6 +123,14 @@ export default class ProdAdd extends Vue {
   private onBtnCleanClick(e: Event) {
     (this.$refs.discardPrompt as any).show();
   }
+
+  @appStore.State("quillContent") readonly quillContent!: string;
+  @appStore.Mutation("setQuillContent") setQuillContent!: (
+    payload: string
+  ) => void;
+
+  @appStore.Action("load") loading!: () => void;
+  @appStore.Action("loaded") loaded!: () => void;
 }
 </script>
 
