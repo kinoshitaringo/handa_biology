@@ -13,8 +13,6 @@
 import { Vue } from "vue-property-decorator";
 
 export default class About extends Vue {
-  public onClick() {
-    console.log("hello world");
-  }
+  public onClick() {}
 }
 </script>

@@ -55,7 +55,7 @@ const NAVS = [
           DROP_ITEM({
             name: "新增产品信息",
             icon: "cil-plus",
-            to: "/pord-add"
+            to: "/prod-add"
           })
         ]
       ),

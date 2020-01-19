@@ -1,5 +1,4 @@
-import Home from "../views/Home.vue";
-import Router, { RouteConfig } from "vue-router";
+import Router, { Route, RouteConfig } from "vue-router";
 import Vue from "vue";
 
 Vue.use(Router);
@@ -11,21 +10,35 @@ Vue.use(Router);
 // const MyComponent    component: () =>
 // import(/* webpackChunkName: "about" */ "../views/About.vue")
 // import the Component here
-const TheContainer = () => import("@/components/container/TheContainer.vue");
-const Sysinfo = () => import("@/views/sysinfo.vue");
 const Login = () => import("@/views/login.vue");
+const TheContainer = () => import("@/components/container/TheContainer.vue");
+const Home = () => import("@/views/home.vue");
+const Sysinfo = () => import("@/views/sysinfo.vue");
+const Prods = () => import("@/views/prods.vue");
+const ProdAdd = () => import("@/views/prodAdd.vue");
 
 const routes: RouteConfig[] = [
   {
     path: "/",
-    redirect: "/admin",
     name: "首页",
     component: TheContainer,
     children: [
       {
-        path: "/admin",
+        path: "",
+        name: "首页",
+        component: Home
+      },
+      {
+        path: "/sysinfo",
+        name: "系统数据",
         component: Sysinfo
-      }
+      },
+      {
+        path: "/prods",
+        name: "产品信息列表",
+        component: Prods
+      },
+      { path: "/prod-add", name: "添加产品信息", component: ProdAdd }
     ]
   },
   {
@@ -39,6 +52,12 @@ const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+// global guard
+router.beforeEach((to: Route, from: Route, next: (to?: any) => void) => {
+  if (to.name) document.title = to.name;
+  next();
 });
 
 export default router;

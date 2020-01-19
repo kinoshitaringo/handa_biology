@@ -1,4 +1,5 @@
 import App from "./App.vue";
+import BootstrapVue from "bootstrap-vue";
 import CoreuiVue from "@coreui/vue";
 import icons from "./assets/icons";
 import router from "./router";
@@ -9,6 +10,7 @@ Vue.config.productionTip = false;
 Vue.config.performance = true;
 
 Vue.use(CoreuiVue);
+Vue.use(BootstrapVue);
 
 new Vue({
   icons,
