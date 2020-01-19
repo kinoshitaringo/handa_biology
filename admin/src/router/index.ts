@@ -38,7 +38,7 @@ const routes: RouteConfig[] = [
         name: "产品信息列表",
         component: Prods
       },
-      { path: "/prod-add", name: "添加产品信息", component: ProdAdd }
+      { path: "/prod-add", name: "新增产品信息", component: ProdAdd }
     ]
   },
   {

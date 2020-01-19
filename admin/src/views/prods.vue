@@ -1,6 +1,9 @@
 <template>
   <div class="Prods">
-    prods
+    <div class="card">
+      <span class="card-header">header</span>
+      <div class="card-body">body</div>
+    </div>
   </div>
 </template>
 
