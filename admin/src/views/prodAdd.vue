@@ -11,7 +11,8 @@
           @img="uploadImg"
         />
 
-        <div class="buttons mt-3 d-flex align-items-center">
+        <!-- footer -->
+        <div class="footer mt-3 d-flex align-items-center">
           <div class="mr-auto w-50">
             <b-form-valid-feedback class="text-danger" :state="!isValidated">
               输入的内容太少了~
@@ -27,14 +28,6 @@
         </div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="card-header">source code</div>
-      <div class="card-body">
-        {{ content }}
-      </div>
-    </div>
-    <!-- footer -->
 
     <!-- modals -->
     <modal-warn
@@ -106,14 +99,3 @@ export default class ProdAdd extends Vue {
   @appStore.Action("loaded") loaded!: () => void;
 }
 </script>
-
-<style lang="scss">
-// 引入编辑器样式
-@import "~quill/dist/quill.core.css";
-@import "~quill/dist/quill.snow.css";
-@import "~quill/dist/quill.bubble.css";
-#quillEditor .ql-editor {
-  // 设置最小高度
-  min-height: 50vh;
-}
-</style>

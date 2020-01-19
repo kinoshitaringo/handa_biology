@@ -1,6 +1,6 @@
 <template>
   <div class="App">
-    <div class="loading-blocker" v-show="isLoading">
+    <div class="loading-blocker fadeIn animated" v-show="isLoading">
       <div class="spinner-grow bg-primary" role="status"></div>
       <div class="spinner-grow bg-primary" role="status"></div>
       <div class="spinner-grow bg-primary" role="status">

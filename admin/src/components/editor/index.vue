@@ -127,7 +127,12 @@ export default class QuillEditor extends Vue {
 </script>
 
 <style lang="scss">
-#quilEditor {
-  min-height: 500px;
+// 引入编辑器样式
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+@import "~quill/dist/quill.bubble.css";
+#quillEditor .ql-editor {
+  // 设置最小高度
+  min-height: 300px;
 }
 </style>

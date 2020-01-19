@@ -2,15 +2,19 @@
 .bg-primary {
   color: $font-color;
 }
+
 .bg-info {
   color: $font-color;
 }
+
 .bg-warning {
   color: $font-color;
 }
+
 .bg-danger {
   color: $font-color;
 }
+
 // .bg-light {
 //   color: $font-color;
 // }
@@ -30,6 +34,7 @@
 .fadeIn {
   animation-name: fadeIn;
 }
+
 .animated {
   animation-duration: 1s;
 }
