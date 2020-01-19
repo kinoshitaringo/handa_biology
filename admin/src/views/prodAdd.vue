@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import Editor from "@/components/editor/index.vue";
+import Editor from "@/components/Editor.vue";
 import ModalWarn from "@/components/modals/warn.vue";
 import { Action, namespace, State } from "vuex-class";
 import { Component, Vue } from "vue-property-decorator";
