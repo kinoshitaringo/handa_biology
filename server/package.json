@@ -24,7 +24,7 @@
     "lodash": "^4.17.15",
     "mkdirp": "^0.5.1",
     "mysql2": "^2.1.0",
-    "typeorm": "^0.2.22",
+    "typeorm": "^0.2.25",
     "winston": "^3.2.1"
   },
   "devDependencies": {
